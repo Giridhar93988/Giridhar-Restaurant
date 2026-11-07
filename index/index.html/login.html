@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giridhar Restaurant | Login</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f8f4ef;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+
+        nav {
+            background: #21140e;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: orange;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        /* Login Section */
+
+        .login-section {
+            min-height: 85vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .login-container {
+            width: 900px;
+            min-height: 500px;
+            background: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Left Side */
+
+        .login-left {
+            background:
+            linear-gradient(rgba(0,0,0,0.65),
+            rgba(0,0,0,0.65)),
+            url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+            padding: 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-left h1 {
+            font-size: 35px;
+            color: orange;
+            margin-bottom: 20px;
+        }
+
+        .login-left p {
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .login-left h3 {
+            margin-top: 30px;
+            color: #ffb347;
+        }
+
+        /* Right Side */
+
+        .login-right {
+            padding: 50px 40px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .login-right h2 {
+            text-align: center;
+            color: #a84300;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: gray;
+            margin-bottom: 30px;
+        }
+
+        /* Form */
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: orange;
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box button {
+            position: absolute;
+            right: 10px;
+            top: 17px;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        /* Remember Password */
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .options input {
+            width: auto;
+            margin: 0;
+        }
+
+        .options a {
+            color: #a84300;
+            text-decoration: none;
+        }
+
+        /* Login Button */
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #a84300;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background: orange;
+        }
+
+        /* Demo Details */
+
+        .demo {
+            margin-top: 25px;
+            background: #fff3e6;
+            padding: 15px;
+            border-radius: 7px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .demo h4 {
+            color: #a84300;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #21140e;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media(max-width: 700px) {
+
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+
+            .login-left {
+                min-height: 250px;
+                padding: 30px;
+            }
+
+            .login-right {
+                padding: 30px 25px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav>
+
+        <h2>GR Restaurant</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="index.html#reservation">Reservation</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Login Section -->
+
+    <section class="login-section">
+
+        <div class="login-container">
+
+            <!-- Left Section -->
+
+            <div class="login-left">
+
+                <h1>Welcome to Giridhar's Restaurant!</h1>
+
+                <p>
+                    Experience delicious food and
+                    unforgettable dining moments.
+
+                    Login to your account and reserve
+                    your favourite table today.
+                </p>
+
+                <h3>🍽 Delicious Food | Great Experience</h3>
+
+            </div>
+
+
+            <!-- Right Section -->
+
+            <div class="login-right">
+
+                <h2>Login</h2>
+
+                <p class="subtitle">
+                    Enter your details to continue
+                </p>
+
+
+                <form id="loginForm">
+
+                    <label>Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+
+                    <label>Password</label>
+
+                    <div class="password-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            onclick="togglePassword()"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+
+                    <div class="options">
+
+                        <label>
+                            <input type="checkbox">
+                            Remember me
+                        </label>
+
+                        <a href="#" onclick="forgotPassword()">
+                            Forgot Password?
+                        </a>
+
+                    </div>
+
+
+                    <button type="submit" class="login-btn">
+
+                        Login
+
+                    </button>
+
+                </form>
+
+
+                <p id="message"></p>
+
+
+                <!-- Demo Login -->
+
+                <div class="demo">
+
+                    <h4>Demo Login Details</h4>
+
+                    <p>Email: customer@gmail.com</p>
+
+                    <p>Password: 123456</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Giridhar's Restaurant.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Show and Hide Password
+
+        function togglePassword() {
+
+            let password =
+                document.getElementById("password");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+            } else {
+
+                password.type = "password";
+
+            }
+
+        }
+
+
+        // Login Validation
+
+        document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let email =
+                document.getElementById("email").value.trim();
+
+            let password =
+                document.getElementById("password").value;
+
+            let message =
+                document.getElementById("message");
+
+
+            if (
+                email === "customer@gmail.com" &&
+                password === "123456"
+            ) {
+
+                message.style.color = "green";
+
+                message.innerHTML =
+                    "Login Successful! Welcome Giridhar Restaurant.";
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html#reservation";
+
+                }, 1500);
+
+            }
+
+            else {
+
+                message.style.color = "red";
+
+                message.innerHTML =
+                    "Invalid Email or Password!";
+
+            }
+
+        });
+
+
+        // Forgot Password
+
+        function forgotPassword() {
+
+            alert("Please contact restaurant support to reset your password.");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

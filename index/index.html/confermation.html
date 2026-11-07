@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Confirmation | Giridhar Restaurant</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #21140e;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background: #160d08;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            color: #ff9d42;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            color: #ff9d42;
+        }
+
+        .confirmation-container {
+            max-width: 750px;
+            margin: 45px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #e5f8e9;
+            color: #20a34a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            margin: 0 auto 20px;
+        }
+
+        .confirmation-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .confirmation-title h1 {
+            color: #208b42;
+            margin-bottom: 12px;
+        }
+
+        .confirmation-title p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .booking-id {
+            background: #fff1e5;
+            border: 1px dashed #a84300;
+            padding: 18px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .booking-id h3 {
+            color: #702c00;
+            margin-bottom: 8px;
+        }
+
+        .booking-id span {
+            color: #a84300;
+            font-size: 22px;
+            font-weight: bold;
+            word-break: break-word;
+        }
+
+        .details-title {
+            color: #a84300;
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail-box {
+            background: #fffaf5;
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 7px;
+        }
+
+        .detail-box small {
+            color: #777;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .detail-box strong {
+            color: #333;
+            overflow-wrap: anywhere;
+        }
+
+        .requests-box {
+            margin-top: 18px;
+            background: #fffaf5;
+            padding: 15px;
+            border-radius: 7px;
+            border: 1px solid #eee;
+        }
+
+        .requests-box h4 {
+            color: #a84300;
+            margin-bottom: 8px;
+        }
+
+        .requests-box p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .notice {
+            background: #eaf4ff;
+            color: #24517a;
+            padding: 15px;
+            border-radius: 7px;
+            margin-top: 25px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .buttons a,
+        .buttons button {
+            padding: 13px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .home-btn {
+            background: #a84300;
+            color: white;
+        }
+
+        .new-btn {
+            background: #21140e;
+            color: white;
+        }
+
+        .print-btn {
+            background: #208b42;
+            color: white;
+        }
+
+        .buttons a:hover,
+        .buttons button:hover {
+            opacity: 0.85;
+        }
+
+        #noBooking {
+            text-align: center;
+            color: #a84300;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #160d08;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media(max-width: 600px) {
+            .confirmation-container {
+                margin: 25px 15px;
+                padding: 22px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .confirmation-title h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* Print only booking details */
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            header,
+            footer,
+            .buttons,
+            .notice {
+                display: none;
+            }
+
+            .confirmation-container {
+                margin: 0;
+                max-width: 100%;
+                box-shadow: none;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header>
+
+        <h2>Giridhar Restaurant</h2>
+
+        <a href="../index.html">Home</a>
+
+    </header>
+
+
+    <!-- Confirmation Section -->
+
+    <main class="confirmation-container" id="confirmationContainer">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <div class="confirmation-title">
+
+            <h1>Booking Successful!</h1>
+
+            <p>
+                Thank you for choosing Giridhar Restaurant.
+                Your reservation details are displayed below.
+            </p>
+
+        </div>
+
+
+        <!-- Booking ID -->
+
+        <div class="booking-id">
+
+            <h3>Your Booking ID</h3>
+
+            <span id="bookingId">Loading...</span>
+
+        </div>
+
+
+        <!-- Customer Details -->
+
+        <h2 class="details-title">Reservation Details</h2>
+
+        <div class="details-grid">
+
+            <div class="detail-box">
+                <small>Customer Name</small>
+                <strong id="customerName">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Email Address</small>
+                <strong id="customerEmail">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Mobile Number</small>
+                <strong id="customerPhone">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Number of Guests</small>
+                <strong id="guestCount">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Reservation Date</small>
+                <strong id="reservationDate">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Reservation Time</small>
+                <strong id="reservationTime">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Selected Table</small>
+                <strong id="tableType">-</strong>
+            </div>
+
+            <div class="detail-box">
+                <small>Special Occasion</small>
+                <strong id="occasion">-</strong>
+            </div>
+
+        </div>
+
+
+        <!-- Special Requests -->
+
+        <div class="requests-box">
+
+            <h4>Special Requests</h4>
+
+            <p id="specialRequests">No special requests.</p>
+
+        </div>
+
+
+        <!-- Notice -->
+
+        <div class="notice">
+
+            <strong>Important:</strong>
+
+            This is a reservation request confirmation from the
+            frontend demonstration. Please contact the restaurant
+            to verify your table booking.
+
+        </div>
+
+
+        <!-- Action Buttons -->
+
+        <div class="buttons">
+
+            <button class="print-btn" onclick="window.print()">
+                Print Confirmation
+            </button>
+
+            <a href="reservation.html" class="new-btn">
+                New Reservation
+            </a>
+
+            <a href="../index.html" class="home-btn">
+                Back to Home
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- No Booking Message -->
+
+    <div id="noBooking" style="display:none; padding:50px 20px;">
+
+        <h2>No Booking Details Found!</h2>
+
+        <p>Please make a reservation first.</p>
+
+        <br>
+
+        <a href="reservation.html" style="color:#ff9d42;">
+            Book Your Table
+        </a>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Giridhar Restaurant. All Rights Reserved.
+        </p>
+
+        <p>
+            Delicious Food | Great Taste | Happy Moments
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Get the latest booking from localStorage
+
+        const bookingData = localStorage.getItem(
+            "latestGiridharBooking"
+        );
+
+        if (bookingData) {
+
+            const booking = JSON.parse(bookingData);
+
+            // Display booking information
+
+            document.getElementById("bookingId").textContent =
+                booking.bookingId || "-";
+
+            document.getElementById("customerName").textContent =
+                booking.name || "-";
+
+            document.getElementById("customerEmail").textContent =
+                booking.email || "-";
+
+            document.getElementById("customerPhone").textContent =
+                booking.phone || "-";
+
+            document.getElementById("guestCount").textContent =
+                (booking.guests || "-") + " Person(s)";
+
+            // Format date
+
+            if (booking.date) {
+
+                const date = new Date(booking.date + "T00:00:00");
+
+                document.getElementById("reservationDate").textContent =
+                    date.toLocaleDateString("en-IN", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric"
+                    });
+
+            }
+
+            document.getElementById("reservationTime").textContent =
+                booking.time || "-";
+
+            document.getElementById("tableType").textContent =
+                booking.table || "-";
+
+            document.getElementById("occasion").textContent =
+                booking.occasion || "None";
+
+            document.getElementById("specialRequests").textContent =
+                booking.requests || "No special requests.";
+
+        } else {
+
+            // Hide confirmation if no booking exists
+
+            document.getElementById("confirmationContainer").style.display =
+                "none";
+
+            document.getElementById("noBooking").style.display =
+                "block";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

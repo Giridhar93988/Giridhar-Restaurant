@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Giridhar Restaurant | Table Reservation</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fffaf5;
+            color: #333;
+        }
+
+        /* Navigation */
+
+        header {
+            width: 100%;
+            background: #21140e;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: #ff9d42;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff9d42;
+        }
+
+        .nav-register {
+            background: #a84300;
+            padding: 10px 17px;
+            border-radius: 5px;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            background: none;
+            border: none;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+
+        .hero {
+            height: 620px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.65),
+                    rgba(0,0,0,0.65)
+                ),
+                url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4")
+                center/cover no-repeat;
+
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .hero-content h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: #ff9d42;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons a {
+            display: inline-block;
+            padding: 14px 25px;
+            margin-right: 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #a84300;
+            color: white;
+        }
+
+        .secondary-btn {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .hero-buttons a:hover {
+            background: #ff9d42;
+            color: #21140e;
+        }
+
+        /* Common Section */
+
+        section {
+            padding: 75px 8%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-heading h2 {
+            color: #a84300;
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* About Section */
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .about-content h2 {
+            color: #a84300;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .about-content a {
+            display: inline-block;
+            margin-top: 10px;
+            background: #a84300;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 5px;
+        }
+
+        /* Food Section */
+
+        .food-section {
+            background: #fff1e5;
+        }
+
+        .food-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .food-details {
+            padding: 22px;
+            text-align: center;
+        }
+
+        .food-details h3 {
+            color: #702c00;
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .food-details p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .food-details span {
+            color: #a84300;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .view-menu {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .view-menu a {
+            background: #a84300;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        /* Services */
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            padding: 35px 25px;
+            background: white;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .service-card .icon {
+            font-size: 45px;
+            margin-bottom: 18px;
+        }
+
+        .service-card h3 {
+            color: #a84300;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Reservation Banner */
+
+        .reservation-banner {
+            background:
+                linear-gradient(
+                    rgba(20,10,5,0.8),
+                    rgba(20,10,5,0.8)
+                ),
+                url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0")
+                center/cover;
+
+            text-align: center;
+            color: white;
+        }
+
+        .reservation-banner h2 {
+            font-size: 36px;
+            color: #ff9d42;
+            margin-bottom: 15px;
+        }
+
+        .reservation-banner p {
+            font-size: 17px;
+            margin-bottom: 28px;
+        }
+
+        .reservation-banner a {
+            display: inline-block;
+            background: #a84300;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .reservation-banner a:hover {
+            background: #ff9d42;
+            color: #21140e;
+        }
+
+        /* Contact */
+
+        .contact-section {
+            background: #fff1e5;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .contact-card h3 {
+            color: #a84300;
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #160d08;
+            color: white;
+            padding: 35px 8%;
+            text-align: center;
+        }
+
+        footer h2 {
+            color: #ff9d42;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            margin: 10px 0;
+            color: #ddd;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        .footer-links a:hover {
+            color: #ff9d42;
+        }
+
+        /* Responsive Design */
+
+        @media(max-width: 900px) {
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .food-container,
+            .services-container,
+            .contact-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+        }
+
+        @media(max-width: 650px) {
+
+            header {
+                padding: 18px 5%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #21140e;
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                margin: 12px 0;
+            }
+
+            .hero {
+                height: 520px;
+                padding: 0 7%;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .food-container,
+            .services-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 50px 6%;
+            }
+
+            .section-heading h2 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <header>
+
+        <div class="logo">
+            Giridhar Restaurant
+        </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+            ☰
+        </button>
+
+        <nav id="navbar">
+
+            <a href="index.html">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="pages/menu.html">Menu</a>
+
+            <a href="pages/reservation.html">Reservation</a>
+
+            <a href="pages/login.html">Login</a>
+
+            <a href="pages/register.html" class="nav-register">Register</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- Hero Section -->
+
+    <section class="hero"

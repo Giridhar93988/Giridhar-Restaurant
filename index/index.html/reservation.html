@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Table Reservation | Giridhar Restaurant</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #21140e;
+            color: #333;
+        }
+
+        .reservation-header {
+            background: #160d08;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reservation-header h2 {
+            color: #ff9d42;
+        }
+
+        .reservation-header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .reservation-header a:hover {
+            color: #ff9d42;
+        }
+
+        .reservation-container {
+            max-width: 850px;
+            margin: 45px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+        }
+
+        .reservation-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .reservation-title h1 {
+            color: #a84300;
+            margin-bottom: 10px;
+        }
+
+        .reservation-title p {
+            color: #666;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #a84300;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .reservation-btn {
+            width: 100%;
+            padding: 15px;
+            background: #a84300;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .reservation-btn:hover {
+            background: #702c00;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-home a {
+            color: #a84300;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #160d08;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media(max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .reservation-container {
+                margin: 25px 15px;
+                padding: 22px;
+            }
+
+            .reservation-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="reservation-header">
+
+        <h2>Giridhar Restaurant</h2>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Reservation Form -->
+    <section class="reservation-container">
+
+        <div class="reservation-title">
+
+            <h1>Book Your Table</h1>
+
+            <p>
+                Reserve your favourite table and enjoy delicious food
+                at Giridhar Restaurant.
+            </p>
+
+        </div>
+
+
+        <form id="reservationForm">
+
+            <!-- Customer Details -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="customerName">Full Name</label>
+
+                    <input type="text"
+                           id="customerName"
+                           placeholder="Enter your name"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">Email Address</label>
+
+                    <input type="email"
+                           id="email"
+                           placeholder="Enter your email"
+                           required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="phone">Mobile Number</label>
+
+                    <input type="tel"
+                           id="phone"
+                           placeholder="10-digit mobile number"
+                           pattern="[0-9]{10}"
+                           maxlength="10"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="guests">Number of Guests</label>
+
+                    <select id="guests" required>
+
+                        <option value="">Select Guests</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 Persons</option>
+                        <option value="3">3 Persons</option>
+                        <option value="4">4 Persons</option>
+                        <option value="5">5 Persons</option>
+                        <option value="6">6 Persons</option>
+                        <option value="7">7 Persons</option>
+                        <option value="8">8 Persons</option>
+                        <option value="9">9 Persons</option>
+                        <option value="10">10 Persons</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Reservation Date and Time -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="date">Reservation Date</label>
+
+                    <input type="date"
+                           id="date"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="time">Reservation Time</label>
+
+                    <select id="time" required>
+
+                        <option value="">Select Time</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="01:00 PM">01:00 PM</option>
+                        <option value="02:00 PM">02:00 PM</option>
+                        <option value="03:00 PM">03:00 PM</option>
+                        <option value="06:00 PM">06:00 PM</option>
+                        <option value="07:00 PM">07:00 PM</option>
+                        <option value="08:00 PM">08:00 PM</option>
+                        <option value="09:00 PM">09:00 PM</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Table Selection -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="tableType">Table Type</label>
+
+                    <select id="tableType" required>
+
+                        <option value="">Select Table Type</option>
+                        <option value="Normal Table">Normal Table</option>
+                        <option value="Family Table">Family Table</option>
+                        <option value="Couple Table">Couple Table</option>
+                        <option value="VIP Table">VIP Table</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="occasion">Special Occasion</label>
+
+                    <select id="occasion">
+
+                        <option value="None">No Special Occasion</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Business Meeting">Business Meeting</option>
+                        <option value="Family Gathering">Family Gathering</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Special Requests -->
+
+            <div class="form-group">
+
+                <label for="requests">Special Requests</label>
+
+                <textarea id="requests"
+                          placeholder="Any special requirements?"></textarea>
+
+            </div>
+
+
+            <!-- Submit Button -->
+
+            <button type="submit" class="reservation-btn">
+
+                Confirm Reservation
+
+            </button>
+
+            <div id="message"></div>
+
+        </form>
+
+
+        <div class="back-home">
+
+            <a href="../index.html">← Back to Home</a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            © 2026 Giridhar Restaurant.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        // Set minimum reservation date to today
+
+        const dateInput = document.getElementById("date");
+
+        const today = new Date();
+
+        const localToday = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split("T")[0];
+
+        dateInput.min = localToday;
+
+
+        // Handle reservation form
+
+        document.getElementById("reservationForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("customerName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const guests = document.getElementById("guests").value;
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const table = document.getElementById("tableType").value;
+            const occasion = document.getElementById("occasion").value;
+            const requests = document.getElementById("requests").value.trim();
+
+            const message = document.getElementById("message");
+
+            // Validate mobile number
+
+            if (!/^[0-9]{10}$/.test(phone)) {
+
+                message.style.color = "red";
+                message.textContent = "Please enter a valid mobile number!";
+
+                return;
+
+            }
+
+            // Validate date
+
+            if (date < localToday) {
+
+                message.style.color = "red";
+                message.textContent = "Please select today or a future date!";
+
+                return;
+
+            }
+
+            // Generate booking ID
+
+            const bookingId = "GR" + Date.now();
+
+            // Store reservation details
+
+            const reservation = {
+
+                bookingId: bookingId,
+                name: name,
+                email: email,
+                phone: phone,
+                guests: guests,
+                date: date,
+                time: time,
+                table: table,
+                occasion: occasion,
+                requests: requests
+
+            };
+
+            // Store demo booking in browser storage
+
+            let bookings = JSON.parse(
+                localStorage.getItem("giridharBookings") || "[]"
+            );
+
+            bookings.push(reservation);
+
+            localStorage.setItem(
+                "giridharBookings",
+                JSON.stringify(bookings)
+            );
+
+            // Save latest booking for confirmation page
+
+            localStorage.setItem(
+                "latestGiridharBooking",
+                JSON.stringify(reservation)
+            );
+
+            message.style.color = "green";
+
+            message.textContent =
+                "Reservation submitted successfully! Booking ID: " + bookingId;
+
+            // Redirect to confirmation page
+
+            setTimeout(function() {
+
+                window.location.href = "confirmation.html";
+
+            }, 1500);
+
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Food Menu | Giridhar Restaurant</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fffaf5;
+            color: #333;
+        }
+
+        /* Navigation */
+
+        header {
+            background: #21140e;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ff9d42;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #ff9d42;
+        }
+
+        /* Hero Section */
+
+        .menu-hero {
+            height: 300px;
+            background:
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0")
+                center/cover;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .menu-hero h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .menu-hero p {
+            font-size: 18px;
+        }
+
+        /* Menu Section */
+
+        .menu-section {
+            padding: 55px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            color: #a84300;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        /* Search */
+
+        .search-box {
+            max-width: 450px;
+            margin: 0 auto 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        /* Category Buttons */
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .categories button {
+            padding: 11px 22px;
+            background: white;
+            border: 1px solid #a84300;
+            color: #a84300;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .categories button:hover,
+        .categories button.active {
+            background: #a84300;
+            color: white;
+        }
+
+        /* Food Cards */
+
+        .food-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .food-details {
+            padding: 20px;
+        }
+
+        .food-details h3 {
+            color: #702c00;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .food-details p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 42px;
+        }
+
+        .food-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .price {
+            color: #a84300;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .book-btn {
+            background: #a84300;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .book-btn:hover {
+            background: #702c00;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        /* Booking Banner */
+
+        .booking-banner {
+            background: #21140e;
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .booking-banner h2 {
+            color: #ff9d42;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .booking-banner p {
+            margin-bottom: 25px;
+        }
+
+        .booking-banner a {
+            display: inline-block;
+            background: #a84300;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .booking-banner a:hover {
+            background: #702c00;
+        }
+
+        /* Footer */
+
+        footer {
+            background: #160d08;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+
+        @media(max-width: 900px) {
+            .food-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 5px;
+                display: inline-block;
+            }
+
+            .menu-hero h1 {
+                font-size: 32px;
+            }
+
+            .food-container {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-section {
+                padding: 35px 5%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <header>
+
+        <div class="logo">
+            Giridhar Restaurant
+        </div>
+
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="reservation.html">Reservation</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Hero Section -->
+
+    <section class="menu-hero">
+
+        <h1>Our Delicious Menu</h1>
+
+        <p>Fresh Ingredients | Delicious Food | Wonderful Experience</p>
+
+    </section>
+
+
+    <!-- Menu Section -->
+
+    <section class="menu-section">
+
+        <div class="section-title">
+
+            <h2>Explore Our Menu</h2>
+
+            <p>
+                Discover delicious dishes prepared specially for you.
+            </p>
+
+        </div>
+
+
+        <!-- Search Box -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search your favourite food..."
+            >
+
+        </div>
+
+
+        <!-- Categories -->
+
+        <div class="categories">
+
+            <button class="active" data-category="all">All</button>
+
+            <button data-category="starters">Starters</button>
+
+            <button data-category="main">Main Course</button>
+
+            <button data-category="biryani">Biryani</button>
+
+            <button data-category="desserts">Desserts</button>
+
+            <button data-category="drinks">Drinks</button>
+
+        </div>
+
+
+        <!-- Food Items -->
+
+        <div class="food-container" id="foodContainer">
+
+
+            <!-- Starters -->
+
+            <div class="food-card" data-category="starters">
+
+                <img
+                    src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8"
+                    alt="Paneer Tikka"
+                >
+
+                <div class="food-details">
+
+                    <h3>Paneer Tikka</h3>
+
+                    <p>Delicious grilled paneer with Indian spices.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹180</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card" data-category="starters">
+
+                <img
+                    src="https://images.unsplash.com/photo-1601050690597-df0568f70950"
+                    alt="Samosa"
+                >
+
+                <div class="food-details">
+
+                    <h3>Veg Samosa</h3>
+
+                    <p>Crispy pastry filled with delicious spiced vegetables.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹60</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Main Course -->
+
+            <div class="food-card" data-category="main">
+
+                <img
+                    src="https://images.unsplash.com/photo-1546833999-b9f581a1996d"
+                    alt="Indian Thali"
+                >
+
+                <div class="food-details">
+
+                    <h3>Special Veg Thali</h3>
+
+                    <p>A complete Indian meal with rice, curry and bread.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹220</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card" data-category="main">
+
+                <img
+                    src="https://images.unsplash.com/photo-1565557623262-b51c2513a641"
+                    alt="Butter Chicken"
+                >
+
+                <div class="food-details">
+
+                    <h3>Butter Chicken</h3>
+
+                    <p>Rich and creamy chicken curry with aromatic spices.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹280</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Biryani -->
+
+            <div class="food-card" data-category="biryani">
+
+                <img
+                    src="https://images.unsplash.com/photo-1563379091339-03246963d96c"
+                    alt="Chicken Biryani"
+                >
+
+                <div class="food-details">
+
+                    <h3>Chicken Biryani</h3>
+
+                    <p>Traditional aromatic biryani with tender chicken.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹250</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card" data-category="biryani">
+
+                <img
+                    src="https://images.unsplash.com/photo-1633945274405-b6c8069047b0"
+                    alt="Veg Biryani"
+                >
+
+                <div class="food-details">
+
+                    <h3>Veg Biryani</h3>
+
+                    <p>Flavourful rice cooked with fresh vegetables and spices.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹180</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Desserts -->
+
+            <div class="food-card" data-category="desserts">
+
+                <img
+                    src="https://images.unsplash.com/photo-1578985545062-69928b1d9587"
+                    alt="Chocolate Cake"
+                >
+
+                <div class="food-details">
+
+                    <h3>Chocolate Cake</h3>
+
+                    <p>Soft and delicious chocolate cake for dessert lovers.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹120</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card" data-category="desserts">
+
+                <img
+                    src="https://images.unsplash.com/photo-1563805042-7684c019e1cb"
+                    alt="Ice Cream"
+                >
+
+                <div class="food-details">
+
+                    <h3>Ice Cream</h3>
+
+                    <p>Cool and creamy ice cream with delicious flavours.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹90</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Drinks -->
+
+            <div class="food-card" data-category="drinks">
+
+                <img
+                    src="https://images.unsplash.com/photo-1544145945-f90425340c7e"
+                    alt="Fresh Juice"
+                >
+
+                <div class="food-details">
+
+                    <h3>Fresh Fruit Juice</h3>
+
+                    <p>Refreshing juice prepared with fresh seasonal fruits.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹80</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="food-card" data-category="drinks">
+
+                <img
+                    src="https://images.unsplash.com/photo-1572490122747-3968b75cc699"
+                    alt="Milkshake"
+                >
+
+                <div class="food-details">
+
+                    <h3>Chocolate Milkshake</h3>
+
+                    <p>Thick and creamy chocolate milkshake.</p>
+
+                    <div class="food-bottom">
+
+                        <span class="price">₹110</span>
+
+                        <a href="reservation.html" class="book-btn">Book Table</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- Booking Banner -->
+
+    <section class="booking-banner">
+
+        <h2>Enjoy Your Favourite Food!</h2>
+
+        <p>
+            Visit Giridhar Restaurant with your family and friends.
+            Book your table today!
+        </p>
+
+        <a href="reservation.html">Reserve Your Table</a>
+
+    </section>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>© 2026 Giridhar Restaurant. All Rights Reserved.</p>
+
+        <p>Delicious Food | Great Taste | Happy Moments</p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        const categoryButtons = document.querySelectorAll(".categories button");
+
+        const foodCards = document.querySelectorAll(".food-card");
+
+        const searchInput = document.getElementById("searchInput");
+
+        let selectedCategory = "all";
+
+
+        // Category filtering
+
+        categoryButtons.forEach(button => {
+
+            button.addEventListener("click", function() {
+
+                categoryButtons.forEach(btn => btn.classList.remove("active"));
+
+                this.classList.add("active");
+
+                selectedCategory = this.dataset.category;
+
+                filterFood();
+
+            });
+
+        });
+
+
+        // Search food items
+
+        searchInput.addEventListener("input", filterFood);
+
+
+        // Filter function
+
+        function filterFood() {
+
+            const searchText = searchInput.value.toLowerCase();
+
+            let visibleCount = 0;
+
+            foodCards.forEach(card => {
+
+                const category = card.dataset.category;
+
+                const foodName = card.querySelector("h3").textContent.toLowerCase();
+
+                const description = card.querySelector("p").textContent.toLowerCase();
+
+                const categoryMatch =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+                const searchMatch =
+                    foodName.includes(searchText) ||
+                    description.includes(searchText);
+
+                if (categoryMatch && searchMatch) {
+
+                    card.style.display = "block";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            // Display message when no food is found
+
+            let noResults = document.getElementById("noResults");
+
+            if (visibleCount === 0) {
+
+                if (!noResults) {
+
+                    noResults = document.createElement("div");
+
+                    noResults.id = "noResults";
+
+                    noResults.className = "no-results";
+
+                    noResults.textContent = "Sorry! No food items found.";
+
+                    document.getElementById("foodContainer").appendChild(noResults);
+
+                }
+
+            } else if (noResults) {
+
+                noResults.remove();
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
